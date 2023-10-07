@@ -1,0 +1,10 @@
+[
+  {
+    "date": "2023-10-06T12:07:08.763Z",
+    "message": "{\"process_id\":\"23\",\"_top_level\":1,\"servlet\":{\"path\":\"/api/id/callname\",\"context\":\"/\"},\"language\":\"python\",\"thread\":{\"name\":\"http-nio-8080-exec-1468\",\"id\":4216},\"env\":\"dev\",\"duration\":2,\"component\":\"server\",\"peer\":{\"ipv4\":\"localhost\",\"port\":\"1121\"},\"http\":{\"hostname\":\"google.com\",\"route\":\"/api/id/callname\",\"status_code\":\"201\",\"url_details\":{\"path\":\"/api/id/name\",\"scheme\":\"http\",\"host\":\"google.com\",\"queryString\":{\"orderNumber\":\"burger\"}},\"method\":\"GET\",\"useragent\":\"Apache-HttpClient/4.5.12 (Java/1.8.0_371)\",\"url\":\"http://google.com\"},\"runtime-id\":\"a222\",\"_dd\":{\"agent_version\":\"7.47.1\",\"tracer_version\":\"1.19.2~3bf7058f7f\"},\"span\":{\"kind\":\"server\"}}"
+  },
+  {
+    "date": "2023-10-06T12:07:08.636Z",
+    "message": "{\"process_id\":\"23\",\"_top_level\":1,\"servlet\":{\"path\":\"/api/num/callname\",\"context\":\"/\"},\"language\":\"python\",\"thread\":{\"name\":\"http-nio-8080-exec-1131\",\"id\":3807},\"env\":\"dev\",\"duration\":2,\"component\":\"erver\",\"peer\":{\"ipv4\":\"0.0.0.0\",\"port\":\"1001\"},\"_trace_root\":1,\"http\":{\"hostname\":\"yahoo.com\",\"route\":\"/api/num/value\",\"status_code\":\"4004\",\"url_details\":{\"path\":\"/api/id/name\",\"scheme\":\"http\",\"host\":\"google.com\",\"queryString\":{\"orderNumber\":\"pizza\"}},\"method\":\"GET\",\"host\":\"google.com\",\"path_group\":\"/api/?/orderlines\",\"useragent\":\"Apache-HttpClient/4.5.12 (Java/1.8.0_371)\",\"url\":\"http://google.com\"},\"runtime-id\":\"ac456221\",\"_dd\":{\"agent_version\":\"7.47.1\",\"tracer_version\":\"1.19.2~3bf7058f7f\"},\"span\":{\"kind\":\"server\"}}"
+  }
+]
