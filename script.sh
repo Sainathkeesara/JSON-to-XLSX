@@ -1,49 +1,40 @@
 #!/bin/bash
 
-# Input JSON file name
-input_json="input.json"
-
-# Output Excel file name
-output_excel="output.xlsx"
-
-# Check if jq is installed
-if ! command -v jq &>/dev/null; then
-  echo "jq is not installed. Please install jq to continue."
+# Check if the required tool jq is installed
+if ! command -v jq > /dev/null; then
+  echo "jq is not installed. Please install it and try again."
   exit 1
 fi
 
-# Check if xlsxwriter is installed
-if ! pip3 show xlsxwriter &>/dev/null; then
-  echo "xlsxwriter is not installed. Please install xlsxwriter using pip3."
+# Check if the input CSV file exists
+if [ ! -f "$1" ]; then
+  echo "Input CSV file not found."
   exit 1
 fi
 
-# Extract data from JSON and save it to a CSV file
-jq -r '[.[] | {path: .message | fromjson | .servlet.path, method: .message | fromjson | .http.method, duration: .message | fromjson | .duration}]' "$input_json" | jq -r '.[] | [.method, .path, .duration] | @csv' > temp.csv
+# Check if the output JSON file is specified
+if [ -z "$2" ]; then
+  echo "Usage: $0 <input_csv_file> <output_json_file>"
+  exit 1
+fi
 
-# Create an Excel file and write data to it
-python3 <<END_PYTHON
-import xlsxwriter
+# Convert CSV to JSON using Python
+python3 -c "
+import csv
+import json
+import sys
 
-input_csv = "temp.csv"
-output_xlsx = "$output_excel"
+csv_file = '$1'
+json_file = '$2'
 
-workbook = xlsxwriter.Workbook(output_xlsx)
-worksheet = workbook.add_worksheet()
+data = []
+with open(csv_file, 'r') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    for row in csv_reader:
+        data.append(row)
 
-# Read data from the CSV file and write it to the Excel file
-with open(input_csv, 'r') as csv_file:
-    row = 0
-    for line in csv_file:
-        data = line.strip().split(',')
-        for col, value in enumerate(data):
-            worksheet.write(row, col, value)
-        row += 1
+with open(json_file, 'w') as json_file:
+    json.dump(data, json_file, indent=2)
+"
 
-workbook.close()
-END_PYTHON
-
-# Clean up the temporary CSV file
-rm temp.csv
-
-echo "Conversion complete. Output saved to $output_excel"
+echo "CSV to JSON conversion complete. Output saved to $2."
